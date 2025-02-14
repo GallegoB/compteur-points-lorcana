@@ -6,7 +6,7 @@ const DiceRollScreen = ({ navigation, route }) => {
   const [player1Score, setPlayer1Score] = useState(0);
   const [player2Score, setPlayer2Score] = useState(0);
    const [firstPlayer, setfirstPlayer] = useState('');
-  const { player1, player2, mode } = route.params;
+  const { player1, player2, mode, round } = route.params;
 
   const rollDice = () => {
     const score1 = Math.floor(Math.random() * 12) + 1;
@@ -24,9 +24,9 @@ const DiceRollScreen = ({ navigation, route }) => {
 
   const handleNext = () => {
     if (player1Score > player2Score) {
-      navigation.navigate('Game', { firstPlayer, player1, player2, mode });
+      navigation.navigate('Game', { firstPlayer, player1, player2, mode, round });
     } else if (player2Score > player1Score) {
-      navigation.navigate('Game', { firstPlayer, player1, player2, mode });
+      navigation.navigate('Game', { firstPlayer, player1, player2, mode, round });
     }else{
       Alert("Valeur identique, relancez le dé");
     }

@@ -5,7 +5,7 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 const PlayerInputScreen = ({ navigation, route }) => {
   const [player1, setPlayer1] = useState('');
   const [player2, setPlayer2] = useState('');
-  const { mode } = route.params;
+  const { mode, round, nbRound } = route.params;
 
   const handleSubmit = () => {
     let updatedPlayer1 = player1;
@@ -16,18 +16,25 @@ const PlayerInputScreen = ({ navigation, route }) => {
     if (updatedPlayer2 === '') {
       updatedPlayer2 = 'Joueur 2';
     }
-    navigation.navigate('DiceRoll', { player1: updatedPlayer1, player2: updatedPlayer2, mode });
+    navigation.navigate('DiceRoll', { player1: updatedPlayer1, player2: updatedPlayer2, mode, round, nbRound});
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Entrez les noms des joueurs</Text>
+      <Text>Jeux: {mode}</Text>
+      <Text>Mode: {round}</Text>
+      <Text>Nombre de round: {nbRound}</Text>
+      <Text></Text>
+      <Text>Nom du joueur 1</Text>
       <TextInput
         style={styles.input}
         placeholder="Joueur 1"
         value={player1}
         onChangeText={setPlayer1}
       />
+      <Text></Text>
+      <Text>Nom du joueur 2</Text>
       <TextInput
         style={styles.input}
         placeholder="Joueur 2"
