@@ -1,6 +1,7 @@
 // src/screens/GameScreen.js
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, Alert } from 'react-native';
+import styles from './styles'; // Importez les styles depuis le fichier styles.js
 
 const GameScreen = ({ navigation, route }) => {
   const [player1Score, setPlayer1Score] = useState(0);
@@ -98,18 +99,5 @@ function debParty() {
     </View>
   );
 };
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-});
 
 export default GameScreen;

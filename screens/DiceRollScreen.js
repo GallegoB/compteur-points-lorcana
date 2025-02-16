@@ -1,6 +1,7 @@
 // src/screens/DiceRollScreen.js
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, Alert } from 'react-native';
+import styles from './styles'; // Importez les styles depuis le fichier styles.js
 
 const DiceRollScreen = ({ navigation, route }) => {
   const [player1Score, setPlayer1Score] = useState(0);
@@ -45,16 +46,6 @@ const DiceRollScreen = ({ navigation, route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-});
+
 
 export default DiceRollScreen;

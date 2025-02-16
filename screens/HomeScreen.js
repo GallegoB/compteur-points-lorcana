@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-
+import styles from './styles'; // Importez les styles depuis le fichier styles.js
 
 const HomeScreen = ({ navigation }) => {
   const [mode, setMode] = useState('Libre');
@@ -43,24 +43,6 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    width: '80%',
-  },
-});
+
 
 export default HomeScreen;
