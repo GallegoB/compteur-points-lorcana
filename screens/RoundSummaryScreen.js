@@ -5,19 +5,30 @@ import styles from './styles'; // Importez les styles depuis le fichier styles.j
 
 
 const RoundSummaryScreen = ({ navigation, route }) => {
-  const [comment, setComment] = useState('');
-  const { player1, player2, mode } = route.params;
+  const [comment, setComment] = useState('');  
+  const { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade } = route.params;
 
   const handleSubmit = () => {
     // Enregistrer les couleurs des decks et le commentaire
-    // Pour l'instant, on affiche juste un message
-    alert(`Commentaire: ${comment}`);
-    navigation.navigate('Home');
+    
+
+
+    // Si nbRound est égal à nbRoundMade, on revient à l'écran d'accueil
+    if (nbRound == nbRoundMade) {
+      navigation.navigate('Home');      
+    } else {
+      // Sinon, on revient à l'écran de saisie des Joueurs et on incrémente le numéro de round
+      navigation.navigate('PlayerInput', { mode, round, nbRound, nbRoundMade: nbRoundMade + 1 });
+    }
+    
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fin du round</Text>
+      <Text>Nombre de round: {nbRound}</Text>
+      <Text>Numéro de round: {nbRoundMade}</Text>
+      <Text>Mode: {mode}</Text>
       <TextInput
         style={styles.input}
         placeholder="Ajouter un commentaire"

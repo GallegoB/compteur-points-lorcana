@@ -6,7 +6,11 @@ import styles from './styles'; // Importez les styles depuis le fichier styles.j
 const PlayerInputScreen = ({ navigation, route }) => {
   const [player1, setPlayer1] = useState('');
   const [player2, setPlayer2] = useState('');
-  const { mode, round, nbRound } = route.params;
+  const { mode, round, nbRound, nbRoundMade } = route.params;
+
+
+
+  
 
   const handleSubmit = () => {
     let updatedPlayer1 = player1;
@@ -17,7 +21,7 @@ const PlayerInputScreen = ({ navigation, route }) => {
     if (updatedPlayer2 === '') {
       updatedPlayer2 = 'Joueur 2';
     }
-    navigation.navigate('DiceRoll', { player1: updatedPlayer1, player2: updatedPlayer2, mode, round, nbRound});
+    navigation.navigate('DiceRoll', { player1: updatedPlayer1, player2: updatedPlayer2, mode, round, nbRound, nbRoundMade});
   };
 
   return (
@@ -26,6 +30,7 @@ const PlayerInputScreen = ({ navigation, route }) => {
       <Text>Jeux: {mode}</Text>
       <Text>Mode: {round}</Text>
       <Text>Nombre de round: {nbRound}</Text>
+      <Text>Numéro de round: {nbRoundMade}</Text>
       <Text></Text>
       <Text>Nom du joueur 1</Text>
       <TextInput

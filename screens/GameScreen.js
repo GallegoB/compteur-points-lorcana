@@ -8,11 +8,16 @@ const GameScreen = ({ navigation, route }) => {
   const [player2Score, setPlayer2Score] = useState(0);
   const [player1Victory, setPlayer1Victory] = useState(0);
   const [player2Victory, setPlayer2Victory] = useState(0);
-  const { firstPlayer, player1, player2, mode, round, nbRound } = route.params;
+  const { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade} = route.params;
   let nbGame = 0;
+
+function endGame() {
+  navigation.navigate('RoundSummary', { player1, player2, mode, round, nbRound, nbRoundMade });
+}
+
 function debParty() {
   setPlayer1Score(0);
-  setPlayer2Score(0);  
+  setPlayer2Score(0); 
 }
   const handleIncrement = (player) => {
     if (player === player1 && player1Score < 20) {
@@ -21,27 +26,27 @@ function debParty() {
       setPlayer2Score(player2Score + 1);
     }
 
-    if (player1Score === 20 || player2Score === 20) {
+    if (player1Score == 20 || player2Score == 20) {
       if(round === 'Bo1') {
-        navigation.navigate('RoundSummary', { player1, player2, mode, round, nbRound });
+        endGame();
       }if (round === 'Bo2') {
         if (nbGame < 3) {
           nbGame++;
-          if(player1Score === 20) {
+          if(player1Score == 20) {
             setPlayer1Victory(player1Victory + 1);
             alert(`Victoire de ${player1}`);
-          }if(player2Score === 20) {
+          }else if(player2Score === 20) {
             setPlayer2Victory(player2Victory + 1);
             alert(`Victoire de ${player2}`);
           } 
 
           if (player1Victory === 2 || player2Victory === 2) {  
             alert(`1 Le gagnent de la round est ${player1Victory === 2 ? player1 : player2}`);
-            navigation.navigate('RoundSummary', { player1, player2, mode, round, nbRound  });
+           endGame();
         } else if (player1Victory !== player2Victory) {
             if(player1Victory === 1 && player2Victory === 1) {
                 alert(`Egalité`);
-                navigation.navigate('RoundSummary', { player1, player2, mode, round, nbRound  });
+                endGame();
             } 
         }
                
@@ -49,26 +54,22 @@ function debParty() {
       }
       }if (round === 'Bo3') {
         nbGame++;
-        if(player1Score === 20) {
+        if(player1Score == 20) {
           setPlayer1Victory(player1Victory + 1);
           alert(`Victoire de ${player1}`);
-        }if(player2Score === 20) {
+        }if(player2Score == 20) {
           setPlayer2Victory(player2Victory + 1);
           alert(`Victoire de ${player2}`);
         } 
 
         if(player1Victory === 2 || player2Victory === 2) {  
           alert(`Le gagnent de la round est ${player1Victory === 2 ? player1 : player2}`);
-          navigation.navigate('RoundSummary', { player1, player2, mode, round, nbRound  });
+          endGame();
         }else if(player1Victory === 1 && player2Victory === 1) {
           alert(`Egalité`);
-          navigation.navigate('RoundSummary', { player1, player2, mode, round, nbRound  });
-      } 
-             
+         endGame();
+      }              
         debParty();
-
-
-    
       }
     }
 
@@ -86,13 +87,14 @@ function debParty() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{firstPlayer} commence</Text>
+      <Text>Numéro de round: {nbRoundMade}</Text>
       <Text>Score de {player1}: {player1Score}</Text>
-      <Text>round gagner: {player1Victory}</Text>
+      <Text>Partie gagner: {player1Victory}</Text>
       <Button title={`+`} onPress={() => handleIncrement(player1)} />
       <Button title={`-`} onPress={() => handleDecrement(player1)} />
       <Text></Text>
       <Text>Score de {player2}: {player2Score}</Text>
-      <Text>round gagner: {player2Victory}</Text> 
+      <Text>Partie gagner: {player2Victory}</Text> 
       <Button title={`+`} onPress={() => handleIncrement(player2)} />
       <Button title={`-`} onPress={() => handleDecrement(player2)} />
      

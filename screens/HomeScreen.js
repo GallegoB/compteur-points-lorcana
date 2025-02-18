@@ -7,7 +7,8 @@ import styles from './styles'; // Importez les styles depuis le fichier styles.j
 const HomeScreen = ({ navigation }) => {
   const [mode, setMode] = useState('Libre');
   const [round, setRound] = useState('Bo3');
-  const [nbRound, setNbRound] = useState(0);
+  const [nbRound, setNbRound] = useState(0);  
+    const [nbRoundMade, setNbRoundMade] = useState(1);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Choisissez le mode de jeu</Text>
@@ -38,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
         <Picker.Item label="Bo2" value="Bo2" />
         <Picker.Item label="Bo3" value="Bo3" />
       </Picker>
-        <Button title="Valider" onPress={() => navigation.navigate('PlayerInput', { mode, round, nbRound})} />
+        <Button title="Valider" onPress={() => navigation.navigate('PlayerInput', { mode, round, nbRound, nbRoundMade})} />
     </View>
   );
 };
