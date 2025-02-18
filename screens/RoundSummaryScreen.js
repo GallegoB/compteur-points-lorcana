@@ -6,7 +6,7 @@ import styles from './styles'; // Importez les styles depuis le fichier styles.j
 
 const RoundSummaryScreen = ({ navigation, route }) => {
   const [comment, setComment] = useState('');  
-  const { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade } = route.params;
+  const { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments } = route.params;
 
   const handleSubmit = () => {
     // Enregistrer les couleurs des decks et le commentaire
@@ -18,7 +18,7 @@ const RoundSummaryScreen = ({ navigation, route }) => {
       navigation.navigate('Home');      
     } else {
       // Sinon, on revient à l'écran de saisie des Joueurs et on incrémente le numéro de round
-      navigation.navigate('PlayerInput', { mode, round, nbRound, nbRoundMade: nbRoundMade + 1 });
+      navigation.navigate('PlayerInput', { mode, round, nbRound, nbRoundMade: nbRoundMade + 1, nameTournaments });
     }
     
   };

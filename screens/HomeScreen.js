@@ -7,6 +7,7 @@ import styles from './styles'; // Importez les styles depuis le fichier styles.j
 const HomeScreen = ({ navigation }) => {
   const [mode, setMode] = useState('Libre');
   const [round, setRound] = useState('Bo3');
+  const [nameTournaments, setNameTournaments] = useState('');
   const [nbRound, setNbRound] = useState(0);  
     const [nbRoundMade, setNbRoundMade] = useState(1);
   return (
@@ -20,14 +21,25 @@ const HomeScreen = ({ navigation }) => {
         <Picker.Item label="Libre" value="Libre" />
         <Picker.Item label="Tournoi" value="Tournoi" />
       </Picker>
-
+      {mode === 'Tournoi' && (
+<>
         <TextInput
-              style={styles.input}
-              placeholder="Nombre de round"
-              value={nbRound}
-              onChangeText={setNbRound}
-              keyboardType="numeric"
-            />
+          style={styles.input}
+          placeholder="Nom du tournois"
+          value={nameTournaments}
+          onChangeText={setNameTournaments}
+        />
+        <TextInput
+        style={styles.input}
+        placeholder="Nombre de round"
+        value={nbRound}
+        onChangeText={setNbRound}
+        keyboardType="numeric"
+      />
+      </>
+      )}
+
+       
       <Text style={styles.title}>Choisissez le mode de rondes</Text>
       {/* <Button title="Bo1" onPress={() => setMode('Bo1')} />
       <Button title="Bo2" onPress={() => setMode('Bo2')} />
@@ -39,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
         <Picker.Item label="Bo2" value="Bo2" />
         <Picker.Item label="Bo3" value="Bo3" />
       </Picker>
-        <Button title="Valider" onPress={() => navigation.navigate('PlayerInput', { mode, round, nbRound, nbRoundMade})} />
+        <Button title="Valider" onPress={() => navigation.navigate('PlayerInput', { mode, round, nbRound, nbRoundMade, nameTournaments})} />
     </View>
   );
 };

@@ -8,11 +8,11 @@ const GameScreen = ({ navigation, route }) => {
   const [player2Score, setPlayer2Score] = useState(0);
   const [player1Victory, setPlayer1Victory] = useState(0);
   const [player2Victory, setPlayer2Victory] = useState(0);
-  const { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade} = route.params;
+  const { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments} = route.params;
   let nbGame = 0;
 
 function endGame() {
-  navigation.navigate('RoundSummary', { player1, player2, mode, round, nbRound, nbRoundMade });
+  navigation.navigate('RoundSummary', { player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments });
 }
 
 function debParty() {

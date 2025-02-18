@@ -7,7 +7,7 @@ const DiceRollScreen = ({ navigation, route }) => {
   const [player1Score, setPlayer1Score] = useState(0);
   const [player2Score, setPlayer2Score] = useState(0);
    const [firstPlayer, setfirstPlayer] = useState('');
-  const { player1, player2, mode, round, nbRound, nbRoundMade } = route.params;
+  const { player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments } = route.params;
 
   const rollDice = () => {
     const score1 = Math.floor(Math.random() * 12) + 1;
@@ -24,9 +24,9 @@ const DiceRollScreen = ({ navigation, route }) => {
 
   const handleNext = () => {
     if (player1Score > player2Score) {
-      navigation.navigate('Game', { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade });
+      navigation.navigate('Game', { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments });
     } else if (player2Score > player1Score) {
-      navigation.navigate('Game', { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade });
+      navigation.navigate('Game', { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments });
     }else{
       Alert("Valeur identique, relancez le dé");
     }
@@ -34,14 +34,27 @@ const DiceRollScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lancer le dé pour déterminer le premier joueur</Text>
-    <Text>Round numéro: {nbRoundMade}</Text>
+      <Text style={styles.title}>Lancer le dé pour déterminer le premier joueur de la round {nbRoundMade}</Text>
+    <Text></Text>
       <Button title="Lancer le dé" onPress={rollDice} />
+      <Text></Text>
       <Text>{player1} a obtenu {player1Score}</Text>
+      <View style={styles.dice}>
+        <Text style={styles.diceText}>{player1Score}</Text>
+      </View>
       <Text>{player2} a obtenu {player2Score}</Text>
-
-      <Text style={styles.title}>Le joueur qui commencer est: {firstPlayer}</Text>
-      <Button title="Suivant" onPress={handleNext} />
+      <View style={styles.dice}>
+        <Text style={styles.diceText}>{player2Score}</Text>
+      </View>
+      
+      { firstPlayer === '' ? (<Text>Choisiser le premier joueur</Text>) : (<Text style={styles.title}>Le joueur qui commencer est: {firstPlayer}</Text> )}
+      { firstPlayer !== '' ? (<Button title="Commencer la partie" onPress={handleNext} />) : (<Text></Text>)}
+      { (player1Score === player2Score && player1Score !== 0) ? (<Button title="Relancer le dé" onPress={rollDice} />) : (<Text></Text>)}
+      
+    
+      <Button title='Joueur 1 commence' onPress={() => navigation.navigate('Game', { firstPlayer: player1, player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments })} />
+      <Button title='Joueur 2 commence' onPress={() => navigation.navigate('Game', { firstPlayer: player2, player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments })} />
+      <Button title="Retour" onPress={() => navigation.goBack()} />
     </View>
   );
 };

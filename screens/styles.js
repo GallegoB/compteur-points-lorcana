@@ -18,6 +18,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: '80%',
   },
+  dice: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'black',
+  },
+  diceText: {
+    fontSize: 50,
+    fontWeight: 'bold',
+  },
 });
 
 export default styles;
