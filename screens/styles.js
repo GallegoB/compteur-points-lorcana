@@ -40,6 +40,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 10,
   },
+  infoText: {
+    fontSize: 15,
+    marginBottom: 10,
+  },
+  playerScore: {
+    fontSize: 40,
+    marginBottom: 10,
+  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
