@@ -6,6 +6,8 @@ import PlayerInputScreen from './screens/PlayerInputScreen';
 import DiceRollScreen from './screens/DiceRollScreen';
 import GameScreen from './screens/GameScreen';
 import RoundSummaryScreen from './screens/RoundSummaryScreen';
+import DataScreen from './screens/DataScreen';
+
 
 const Stack = createStackNavigator();
 
@@ -18,6 +20,7 @@ function App() {
         <Stack.Screen name="DiceRoll" component={DiceRollScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
         <Stack.Screen name="RoundSummary" component={RoundSummaryScreen} />
+        <Stack.Screen name="Data" component={DataScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

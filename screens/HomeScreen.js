@@ -52,6 +52,7 @@ const HomeScreen = ({ navigation }) => {
         <Picker.Item label="Bo3" value="Bo3" />
       </Picker>
         <Button title="Valider" onPress={() => navigation.navigate('PlayerInput', { mode, round, nbRound, nbRoundMade, nameTournaments})} />
+    <Button title="Voir les données" onPress={() => navigation.navigate('Data')} />
     </View>
   );
 };

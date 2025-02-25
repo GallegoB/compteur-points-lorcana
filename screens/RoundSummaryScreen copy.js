@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles'; // Importez les styles depuis le fichier styles.js
 import colors from './colors.json'; // Importez le tableau de couleurs depuis le fichier colors.json
 
@@ -10,6 +9,8 @@ const RoundSummaryScreen = ({ navigation, route }) => {
   const [comment, setComment] = useState('');
   const [selectedColors, setSelectedColors] = useState([]);
   const { firstPlayer, player1, player2, mode, round, nbRound, nbRoundMade, nameTournaments } = route.params;
+
+  //const colors = ['Ambre', 'Améthyste', 'Émeraude', 'Rubis', 'Saphir', 'Acier'];
 
   const handleColorChange = (color) => {
     if (selectedColors.includes(color)) {
@@ -19,23 +20,10 @@ const RoundSummaryScreen = ({ navigation, route }) => {
     }
   };
 
-  const handleSubmit = async () => {
-    // Enregistrer les informations en local
-    try {
-      await AsyncStorage.setItem('roundSummary', JSON.stringify({
-        firstPlayer,
-        player1,
-        player2,
-        mode,
-        round,
-        nbRound,
-        nbRoundMade,
-        comment,
-        selectedColors
-      }));
-    } catch (error) {
-      console.error('Erreur lors de l\'enregistrement des données :', error);
-    }
+  const handleSubmit = () => {
+    // Enregistrer les couleurs des decks et le commentaire
+    console.log('Couleurs sélectionnées:', selectedColors);
+    console.log('Commentaire:', comment);
 
     // Si nbRound est égal à nbRoundMade, on revient à l'écran d'accueil
     if (nbRound == nbRoundMade) {
@@ -53,15 +41,15 @@ const RoundSummaryScreen = ({ navigation, route }) => {
       <Text>Mode: {mode}</Text>
       <Text style={styles.subtitle}>Sélectionnez les deux couleurs du deck de l'autre joueur:</Text>
       <View style={styles.colorRow}>
-        {colors.map((color) => (
-          <CheckBox
-            key={color}
-            title={color}
-            checked={selectedColors.includes(color)}
-            onPress={() => handleColorChange(color)}
+      {colors.map((color) => (
+        <CheckBox
+          key={color}
+          title={color}
+          checked={selectedColors.includes(color)}
+          onPress={() => handleColorChange(color)}
             containerStyle={styles.colorCheckBox}
-          />
-        ))}
+        />
+      ))}
       </View>
       <TextInput
         style={styles.input}
@@ -69,6 +57,7 @@ const RoundSummaryScreen = ({ navigation, route }) => {
         value={comment}
         onChangeText={setComment}
       />
+  
       <Button title="Enregistrer" onPress={handleSubmit} />
     </View>
   );
